@@ -1,0 +1,26 @@
+
+.container .userinfo.data-v-69f1fa2c {
+  padding: 0 30rpx;
+  padding-top: 100rpx;
+  text-align: center;
+  background-color: #fa5559;
+}
+.container .userinfo ._img.data-v-69f1fa2c {
+  width: 128rpx;
+  height: 128rpx;
+  border-radius: 128rpx;
+}
+.container .userinfo ._p.data-v-69f1fa2c {
+  height: 75rpx;
+  line-height: 75rpx;
+  font-size: 26rpx;
+  color: #fff;
+}
+.container .userinfo .bottom.data-v-69f1fa2c {
+  height: 75rpx;
+  font-size: 26rpx;
+  color: #fff;
+  border: 0;
+  border-radius: 0;
+  border-color: #fff;
+}

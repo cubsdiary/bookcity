@@ -1,0 +1,5 @@
+<template name="630bc2ea">
+  <view class="_div data-v-360db4c2">
+    {{'图书中心'}}
+  </view>
+</template>

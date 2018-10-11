@@ -1,0 +1,8 @@
+<template name="797fc654">
+  <view class="_div data-v-69f1fa2c container">
+    <view class="_div data-v-69f1fa2c userinfo">
+      <image src="{{userInfo.avatarUrl}}" class="_img data-v-69f1fa2c"></image>
+      <view wx:if="{{}}" class="_p data-v-69f1fa2c">{{userInfo.nickName}}</view> <button class="_button data-v-69f1fa2c bottom" plain="true" open-type="getUserInfo" lang="zh_CN" bindgetuserinfo="handleProxy" data-eventid="{{'0'}}" data-comkey="{{$k}}">获取用户信息</button>
+    </view>
+  </view>
+</template>
