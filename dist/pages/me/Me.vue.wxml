@@ -1,8 +1,15 @@
-<template name="797fc654">
+<template name="e8b397a2">
   <view class="_div data-v-69f1fa2c container">
-    <view class="_div data-v-69f1fa2c userinfo">
-      <image src="{{userInfo.avatarUrl}}" class="_img data-v-69f1fa2c"></image>
-      <view wx:if="{{}}" class="_p data-v-69f1fa2c">{{userInfo.nickName}}</view> <button class="_button data-v-69f1fa2c bottom" plain="true" open-type="getUserInfo" lang="zh_CN" bindgetuserinfo="handleProxy" data-eventid="{{'0'}}" data-comkey="{{$k}}">获取用户信息</button>
+    <view class="_div data-v-69f1fa2c userinfo"><button class="_button data-v-69f1fa2c bottom-img" plain="true" open-type="getUserInfo" lang="zh_CN" bindgetuserinfo="handleProxy" data-eventid="{{'0'}}" data-comkey="{{$k}}">
+        <image class="_img data-v-69f1fa2c imgs" src="{{userInfo.avatarUrl}}"></image>
+      </button> <button class="_button data-v-69f1fa2c bottom-p" plain="true" open-type="getUserInfo" lang="zh_CN" bindgetuserinfo="handleProxy" data-eventid="{{'1'}}" data-comkey="{{$k}}">
+        <view class="_p data-v-69f1fa2c">{{userInfo.nickName}}</view>
+      </button></view>
+    <view class="_div data-v-69f1fa2c menu-bar">
+      <view class="_ul data-v-69f1fa2c menu-list">
+        <view class="_li data-v-69f1fa2c menu-li" bindtap="handleProxy" data-eventid="{{'2'}}" data-comkey="{{$k}}">添加图书</view>
+        <view class="_li data-v-69f1fa2c menu-li">退出登录</view>
+      </view>
     </view>
   </view>
 </template>

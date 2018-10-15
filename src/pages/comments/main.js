@@ -3,7 +3,3 @@ import Comments from './Comments'
 
 const app = new Vue(Comments)
 app.$mount()
-
-export default {
-  config: {}
-}

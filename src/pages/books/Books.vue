@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="libary">
     {{'图书中心'}}
   </div>
 </template>
@@ -10,4 +10,7 @@ export default {
 </script>
 
 <style>
+  .libary {
+    color: red;
+  }
 </style>
