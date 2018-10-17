@@ -1,5 +1,102 @@
 global.webpackJsonp([0],[
 /* 0 */
+/***/ (function(module, exports) {
+
+/* globals __VUE_SSR_CONTEXT__ */
+
+// this module is a runtime utility for cleaner component module output and will
+// be included in the final webpack user bundle
+
+module.exports = function normalizeComponent (
+  rawScriptExports,
+  compiledTemplate,
+  injectStyles,
+  scopeId,
+  moduleIdentifier /* server only */
+) {
+  var esModule
+  var scriptExports = rawScriptExports = rawScriptExports || {}
+
+  // ES6 modules interop
+  var type = typeof rawScriptExports.default
+  if (type === 'object' || type === 'function') {
+    esModule = rawScriptExports
+    scriptExports = rawScriptExports.default
+  }
+
+  // Vue.extend constructor export interop
+  var options = typeof scriptExports === 'function'
+    ? scriptExports.options
+    : scriptExports
+
+  // render functions
+  if (compiledTemplate) {
+    options.render = compiledTemplate.render
+    options.staticRenderFns = compiledTemplate.staticRenderFns
+  }
+
+  // scopedId
+  if (scopeId) {
+    options._scopeId = scopeId
+  }
+
+  var hook
+  if (moduleIdentifier) { // server build
+    hook = function (context) {
+      // 2.3 injection
+      context =
+        context || // cached call
+        (this.$vnode && this.$vnode.ssrContext) || // stateful
+        (this.parent && this.parent.$vnode && this.parent.$vnode.ssrContext) // functional
+      // 2.2 with runInNewContext: true
+      if (!context && typeof __VUE_SSR_CONTEXT__ !== 'undefined') {
+        context = __VUE_SSR_CONTEXT__
+      }
+      // inject component styles
+      if (injectStyles) {
+        injectStyles.call(this, context)
+      }
+      // register component module identifier for async chunk inferrence
+      if (context && context._registeredComponents) {
+        context._registeredComponents.add(moduleIdentifier)
+      }
+    }
+    // used by ssr in case component is cached and beforeCreate
+    // never gets called
+    options._ssrRegister = hook
+  } else if (injectStyles) {
+    hook = injectStyles
+  }
+
+  if (hook) {
+    var functional = options.functional
+    var existing = functional
+      ? options.render
+      : options.beforeCreate
+    if (!functional) {
+      // inject component registration as beforeCreate hook
+      options.beforeCreate = existing
+        ? [].concat(existing, hook)
+        : [hook]
+    } else {
+      // register for functioal component in vue file
+      options.render = function renderWithStyleInjection (h, context) {
+        hook.call(context)
+        return existing(h, context)
+      }
+    }
+  }
+
+  return {
+    esModule: esModule,
+    exports: scriptExports,
+    options: options
+  }
+}
+
+
+/***/ }),
+/* 1 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(global) {// fix env
@@ -5620,104 +5717,7 @@ return Vue$3;
 
 })));
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(7)))
-
-/***/ }),
-/* 1 */
-/***/ (function(module, exports) {
-
-/* globals __VUE_SSR_CONTEXT__ */
-
-// this module is a runtime utility for cleaner component module output and will
-// be included in the final webpack user bundle
-
-module.exports = function normalizeComponent (
-  rawScriptExports,
-  compiledTemplate,
-  injectStyles,
-  scopeId,
-  moduleIdentifier /* server only */
-) {
-  var esModule
-  var scriptExports = rawScriptExports = rawScriptExports || {}
-
-  // ES6 modules interop
-  var type = typeof rawScriptExports.default
-  if (type === 'object' || type === 'function') {
-    esModule = rawScriptExports
-    scriptExports = rawScriptExports.default
-  }
-
-  // Vue.extend constructor export interop
-  var options = typeof scriptExports === 'function'
-    ? scriptExports.options
-    : scriptExports
-
-  // render functions
-  if (compiledTemplate) {
-    options.render = compiledTemplate.render
-    options.staticRenderFns = compiledTemplate.staticRenderFns
-  }
-
-  // scopedId
-  if (scopeId) {
-    options._scopeId = scopeId
-  }
-
-  var hook
-  if (moduleIdentifier) { // server build
-    hook = function (context) {
-      // 2.3 injection
-      context =
-        context || // cached call
-        (this.$vnode && this.$vnode.ssrContext) || // stateful
-        (this.parent && this.parent.$vnode && this.parent.$vnode.ssrContext) // functional
-      // 2.2 with runInNewContext: true
-      if (!context && typeof __VUE_SSR_CONTEXT__ !== 'undefined') {
-        context = __VUE_SSR_CONTEXT__
-      }
-      // inject component styles
-      if (injectStyles) {
-        injectStyles.call(this, context)
-      }
-      // register component module identifier for async chunk inferrence
-      if (context && context._registeredComponents) {
-        context._registeredComponents.add(moduleIdentifier)
-      }
-    }
-    // used by ssr in case component is cached and beforeCreate
-    // never gets called
-    options._ssrRegister = hook
-  } else if (injectStyles) {
-    hook = injectStyles
-  }
-
-  if (hook) {
-    var functional = options.functional
-    var existing = functional
-      ? options.render
-      : options.beforeCreate
-    if (!functional) {
-      // inject component registration as beforeCreate hook
-      options.beforeCreate = existing
-        ? [].concat(existing, hook)
-        : [hook]
-    } else {
-      // register for functioal component in vue file
-      options.render = function renderWithStyleInjection (h, context) {
-        hook.call(context)
-        return existing(h, context)
-      }
-    }
-  }
-
-  return {
-    esModule: esModule,
-    exports: scriptExports,
-    options: options
-  }
-}
-
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(9)))
 
 /***/ }),
 /* 2 */
@@ -5769,6 +5769,81 @@ module.exports = Session;
 
 /***/ }),
 /* 4 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (immutable) */ __webpack_exports__["a"] = get;
+/* harmony export (immutable) */ __webpack_exports__["b"] = post;
+/* harmony export (immutable) */ __webpack_exports__["c"] = showModal;
+/* harmony export (immutable) */ __webpack_exports__["d"] = showSuccess;
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__config__ = __webpack_require__(5);
+// 工具函数库
+
+
+
+function get(url, data) {
+  return request(url, 'GET', data);
+}
+
+function post(url, data) {
+  return request(url, 'POST', data);
+}
+
+function request(url, method, data) {
+  return new Promise((resolve, reject) => {
+    wx.request({
+      data,
+      method,
+      url: __WEBPACK_IMPORTED_MODULE_0__config__["a" /* default */].host + url,
+      success: res => {
+        if (res.data.code === 0) {
+          resolve(res.data.data);
+        } else {
+          showModal('添加失败', res.data.data.msg, false);
+          reject(res.data);
+        }
+      }
+    });
+  }).catch(err => {
+    if (err) {
+      console.log(err);
+    }
+  });
+}
+
+function showModal(title, content, showCancel) {
+  wx.showModal({
+    title: title,
+    content: content,
+    showCancel: showCancel
+  });
+}
+
+function showSuccess(text, type) {
+  wx.showToast({
+    title: text,
+    icon: type
+  });
+}
+
+/***/ }),
+/* 5 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+// 配置项
+
+const host = 'http://localhost:5757';
+
+const config = {
+  host,
+  login: `${host}/weapp/login`
+};
+
+/* harmony default export */ __webpack_exports__["a"] = (config);
+
+/***/ }),
+/* 6 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -5941,13 +6016,13 @@ module.exports = { login, setLoginUrl, loginWithCode }
 
 
 /***/ }),
-/* 5 */
+/* 7 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var constants = __webpack_require__(2);
-var utils = __webpack_require__(28);
+var utils = __webpack_require__(37);
 var Session = __webpack_require__(3);
-var loginLib = __webpack_require__(4);
+var loginLib = __webpack_require__(6);
 
 var noop = function noop() {};
 
@@ -6065,8 +6140,8 @@ module.exports = {
 };
 
 /***/ }),
-/* 6 */,
-/* 7 */
+/* 8 */,
+/* 9 */
 /***/ (function(module, exports) {
 
 var g;
@@ -6093,9 +6168,9 @@ module.exports = g;
 
 
 /***/ }),
-/* 8 */,
-/* 9 */,
-/* 10 */
+/* 10 */,
+/* 11 */,
+/* 12 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -6130,8 +6205,6 @@ function listToStyles (parentId, list) {
 
 
 /***/ }),
-/* 11 */,
-/* 12 */,
 /* 13 */,
 /* 14 */,
 /* 15 */,
@@ -6146,14 +6219,23 @@ function listToStyles (parentId, list) {
 /* 24 */,
 /* 25 */,
 /* 26 */,
-/* 27 */
+/* 27 */,
+/* 28 */,
+/* 29 */,
+/* 30 */,
+/* 31 */,
+/* 32 */,
+/* 33 */,
+/* 34 */,
+/* 35 */,
+/* 36 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var constants = __webpack_require__(2);
-var login = __webpack_require__(4);
+var login = __webpack_require__(6);
 var Session = __webpack_require__(3);
-var request = __webpack_require__(5);
-var Tunnel = __webpack_require__(29);
+var request = __webpack_require__(7);
+var Tunnel = __webpack_require__(38);
 
 var exports = module.exports = {
     login: login.login,
@@ -6177,7 +6259,7 @@ Object.keys(constants).forEach(function (key) {
 });
 
 /***/ }),
-/* 28 */
+/* 37 */
 /***/ (function(module, exports) {
 
 
@@ -6200,11 +6282,11 @@ exports.extend = function extend(target) {
 };
 
 /***/ }),
-/* 29 */
+/* 38 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var requestLib = __webpack_require__(5);
-var wxTunnel = __webpack_require__(30);
+var requestLib = __webpack_require__(7);
+var wxTunnel = __webpack_require__(39);
 
 /**
  * 当前打开的信道，同一时间只能有一个信道打开
@@ -6733,7 +6815,7 @@ function Tunnel(serviceUrl) {
 module.exports = Tunnel;
 
 /***/ }),
-/* 30 */
+/* 39 */
 /***/ (function(module, exports) {
 
 /* istanbul ignore next */
@@ -6770,8 +6852,8 @@ bind();
 module.exports = { listen };
 
 /***/ }),
-/* 31 */,
-/* 32 */
+/* 40 */,
+/* 41 */
 /***/ (function(module, exports) {
 
 /*
@@ -6853,13 +6935,13 @@ function toComment(sourceMap) {
 
 
 /***/ }),
-/* 33 */
+/* 42 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony export (immutable) */ __webpack_exports__["default"] = addStylesClient;
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__listToStyles__ = __webpack_require__(10);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__listToStyles__ = __webpack_require__(12);
 /*
   MIT License http://www.opensource.org/licenses/mit-license.php
   Author Tobias Koppers @sokra

@@ -1,0 +1,31 @@
+<import src="/components/Rate.vue.wxml" /><template name="527eab34">
+  <view class="_div data-v-0d65aa9e book-card">
+    <view class="_div data-v-0d65aa9e thumb">
+      <image src="{{data.image}}" class="_img data-v-0d65aa9e image" mode="aspectFit" alt></image>
+    </view>
+    <view class="_div data-v-0d65aa9e detail">
+      <view class="_div data-v-0d65aa9e row">
+        <view class="_div data-v-0d65aa9e right">
+          {{data.rate}}
+          <template data="{{...$root[$kk+'0'], $root}}" is="6c281504"></template></view>
+        <view class="_div data-v-0d65aa9e left">
+          {{data.title}}
+        </view>
+      </view>
+      <view class="_div data-v-0d65aa9e row">
+        <view class="_div data-v-0d65aa9e right"> 浏览量： </view>
+        <view class="_div data-v-0d65aa9e left">
+          {{data.author}}
+        </view>
+      </view>
+      <view class="_div data-v-0d65aa9e row">
+        <view class="_div data-v-0d65aa9e right">
+          {{data.publisher}}
+        </view>
+        <view class="_div data-v-0d65aa9e left">
+          {{data.user_info.nickName}}
+        </view>
+      </view>
+    </view>
+  </view>
+</template>

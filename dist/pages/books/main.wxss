@@ -1,4 +1,44 @@
 
-.libary {
-  color: red;
+.book-card.data-v-0d65aa9e {
+  padding: 10rpx;
+  overflow: hidden;
+  margin-top: 10rpx;
+  margin-bottom: 10rpx;
+  font-size: 24rpx;
+}
+.book-card .thumb.data-v-0d65aa9e {
+  width: 180rpx;
+  height: 180rpx;
+  float: left;
+  margin: 0 auto;
+  overflow: hidden;
+}
+.book-card .thumb .image.data-v-0d65aa9e {
+  max-width: 180rpx;
+  max-height: 180rpx;
+}
+.book-card .detail.data-v-0d65aa9e {
+  margin-left: 200rpx;
+}
+.book-card .detail .row.data-v-0d65aa9e {
+  line-height: 40rpx;
+  margin-bottom: 6rpx;
+}
+.book-card .detail .right.data-v-0d65aa9e {
+  float: right;
+}
+.book-card .detail .left.data-v-0d65aa9e {
+  margin-right: 160rpx;
+}
+.rate.data-v-12f69481 {
+  position: relative;
+  display: inline-block;
+}
+.rate .hollow.data-v-12f69481 {
+  position: absolute;
+  display: inline-block;
+  top: 0;
+  left: 0;
+  width: 2em;
+  overflow: hidden;
 }

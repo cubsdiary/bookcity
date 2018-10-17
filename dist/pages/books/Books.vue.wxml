@@ -1,5 +1,3 @@
-<template name="08e12085">
-  <view class="_div data-v-360db4c2 libary">
-    {{'图书中心'}}
-  </view>
+<import src="/components/Card.vue.wxml" /><template name="08e12085">
+  <view class="_div data-v-360db4c2 libary"><template wx:key="book.id" data="{{...$root[$kk+'0-'+index], $root}}" is="527eab34" wx:for="{{bookList}}" wx:for-index="index" wx:for-item="book"></template></view>
 </template>

@@ -12,7 +12,7 @@
 	"compileType": "miniprogram",
 	"appid": "wx1c9505b2265157ff",
 	"projectname": "bookcity",
-	"libVersion": "1.6.5",
+	"libVersion": "2.3.0",
 	"condition": {
 		"search": {
 			"current": -1,

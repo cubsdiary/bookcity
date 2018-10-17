@@ -2,7 +2,7 @@
   <div class="container">
     <div class="userinfo">
       <button class="bottom-img" plain="true" open-type="getUserInfo" lang="zh_CN" @getuserinfo="doLogin">
-        <img class="imgs" :src="userInfo.avatarUrl"></img>
+        <img class="imgs" :src="userInfo.avatarUrl" />
       </button>
       <button class="bottom-p" plain="true" open-type="getUserInfo" lang="zh_CN" @getuserinfo="doLogin">
         <p>{{userInfo.nickName}}</p>
@@ -20,7 +20,7 @@
 <script>
 import config from '../../config'
 import qcloud from 'wafer2-client-sdk'
-
+import {showSuccess, post, showModal} from '../../util'
 export default {
   data () {
     return {
@@ -41,17 +41,14 @@ export default {
         qcloud.setLoginUrl(config.login)
         qcloud.login({
           success: (res) => {
-            wx.showToast({
-              title: '登录成功'
-            })
+            showSuccess('登录成功', 'success')
             wx.setStorageSync('__userinfo__', res)
             this.userInfo = res
           },
           fail: (err) => {
-            wx.showToast({
-              icon: 'none',
-              title: '登录失败'
-            })
+            if (err) {
+              showSuccess('登录失败', 'none')
+            }
           }
         })
       }
@@ -59,12 +56,25 @@ export default {
     getBook () {
       wx.scanCode({
         success: (res) => {
-          console.log(res)
+          if (res.result) {
+            this.addBook(res.result)
+          }
         },
         fail: (err) => {
-          console.log(err)
+          if (err) {
+            showModal('失败', '二维码识别信息失败', false)
+          }
         }
       })
+    },
+    async addBook (isbn) {
+      const res = await post('/weapp/addbook', {
+        isbn,
+        openid: this.userInfo.openId
+      })
+      if (res && res.title) {
+        showModal('添加成功', `《${res.title}》添加成功`)
+      }
     }
   }
 }

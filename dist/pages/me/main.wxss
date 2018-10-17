@@ -3,10 +3,8 @@
   background-color: #f6f6f6;
 }
 .container .userinfo.data-v-69f1fa2c {
-  display: -ms-flexbox;
   display: flex;
-  -ms-flex-direction: column;
-      flex-direction: column;
+  flex-direction: column;
   padding: 0 30rpx;
   padding-top: 100rpx;
   text-align: center;

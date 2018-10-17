@@ -1,0 +1,5 @@
+<template name="6c281504">
+  <view class="_div data-v-12f69481 rate"><label class="_span data-v-12f69481">☆☆☆☆☆</label>
+    <view class="_div data-v-12f69481 hollow" style=" {{style}}"> ★★★★★ </view>
+  </view>
+</template>

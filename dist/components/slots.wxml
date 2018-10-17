@@ -1,0 +1,2 @@
+<import src="/components/Card.vue.wxml" />
+<import src="/components/Rate.vue.wxml" />
