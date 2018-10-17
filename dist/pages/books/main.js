@@ -35,7 +35,7 @@ app.$mount();
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_mpvue_loader_1_1_4_mpvue_loader_lib_selector_type_script_index_0_Books_vue__ = __webpack_require__(17);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_mpvue_loader_1_1_4_mpvue_loader_lib_template_compiler_index_id_data_v_360db4c2_hasScoped_false_transformToRequire_video_src_source_src_img_src_image_xlink_href_node_modules_mpvue_loader_1_1_4_mpvue_loader_lib_selector_type_template_index_0_Books_vue__ = __webpack_require__(26);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_mpvue_loader_1_1_4_mpvue_loader_lib_template_compiler_index_id_data_v_360db4c2_hasScoped_true_transformToRequire_video_src_source_src_img_src_image_xlink_href_node_modules_mpvue_loader_1_1_4_mpvue_loader_lib_selector_type_template_index_0_Books_vue__ = __webpack_require__(26);
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
@@ -49,12 +49,12 @@ var normalizeComponent = __webpack_require__(0)
 /* styles */
 var __vue_styles__ = injectStyle
 /* scopeId */
-var __vue_scopeId__ = null
+var __vue_scopeId__ = "data-v-360db4c2"
 /* moduleIdentifier (server only) */
 var __vue_module_identifier__ = null
 var Component = normalizeComponent(
   __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_mpvue_loader_1_1_4_mpvue_loader_lib_selector_type_script_index_0_Books_vue__["a" /* default */],
-  __WEBPACK_IMPORTED_MODULE_1__node_modules_mpvue_loader_1_1_4_mpvue_loader_lib_template_compiler_index_id_data_v_360db4c2_hasScoped_false_transformToRequire_video_src_source_src_img_src_image_xlink_href_node_modules_mpvue_loader_1_1_4_mpvue_loader_lib_selector_type_template_index_0_Books_vue__["a" /* default */],
+  __WEBPACK_IMPORTED_MODULE_1__node_modules_mpvue_loader_1_1_4_mpvue_loader_lib_template_compiler_index_id_data_v_360db4c2_hasScoped_true_transformToRequire_video_src_source_src_img_src_image_xlink_href_node_modules_mpvue_loader_1_1_4_mpvue_loader_lib_selector_type_template_index_0_Books_vue__["a" /* default */],
   __vue_styles__,
   __vue_scopeId__,
   __vue_module_identifier__
@@ -101,7 +101,23 @@ if (false) {(function () {
 //
 //
 //
+//
+//
+//
 
+/*
+  35 条数据
+  每次加载10条
+  1页 0-10
+  2 10-20
+  3 20-30
+  4 30-40（5）
+  page 当前第几页
+
+  没有更多数据
+  1. page = 0 不能显示这条提醒
+  2 page > 0 数据长度< 10 ,停止触底加载
+*/
 
 
 /* harmony default export */ __webpack_exports__["a"] = ({
@@ -110,21 +126,42 @@ if (false) {(function () {
   },
   data() {
     return {
-      bookList: []
+      bookList: [],
+      page: 0,
+      more: true,
+      limit: 3
     };
   },
   mounted() {
-    this.getList();
+    this.getList(true);
   },
   onPullDownRefresh() {
-    this.getList();
+    this.getList(true);
+  },
+  onReachBottom() {
+    if (!this.more) {
+      return;
+    }
+    this.page = this.page + 1;
+    this.getList(false);
   },
   methods: {
-    async getList() {
+    async getList(init) {
+      if (init) {
+        this.more = true;
+        this.page = 0;
+      }
       wx.showNavigationBarLoading();
-      const book = await Object(__WEBPACK_IMPORTED_MODULE_0__util__["a" /* get */])('/weapp/booklist');
-      this.bookList = book.list;
-      wx.stopPullDownRefresh();
+      const books = await Object(__WEBPACK_IMPORTED_MODULE_0__util__["a" /* get */])('/weapp/booklist', { page: this.page, limit: this.limit });
+      if (books.list.length < this.limit && this.page > 0) {
+        this.more = false;
+      }
+      if (init) {
+        this.bookList = books.list;
+        wx.stopPullDownRefresh();
+      } else {
+        this.bookList = this.bookList.concat(books.list);
+      }
       wx.hideNavigationBarLoading();
     }
   }
@@ -423,7 +460,7 @@ if (false) {
 var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
     staticClass: "libary"
-  }, _vm._l((_vm.bookList), function(book, index) {
+  }, [_vm._l((_vm.bookList), function(book, index) {
     return _c('Card', {
       key: book.id,
       attrs: {
@@ -431,7 +468,9 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
         "mpcomid": '0-' + index
       }
     })
-  }))
+  }), _vm._v(" "), (!_vm.more) ? _c('p', {
+    staticClass: "text-footer"
+  }, [_vm._v("\n    没有跟多数据\n  ")]) : _vm._e()], 2)
 }
 var staticRenderFns = []
 render._withStripped = true

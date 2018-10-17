@@ -61,7 +61,7 @@ export default {
     font-size: 24rpx;
     .thumb{
       width: 90px;
-      height: 90px;
+      height: 390px;
       float: left;
       margin: 0 auto;
       overflow: hidden;

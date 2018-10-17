@@ -1,4 +1,8 @@
 
+.text-footer.data-v-360db4c2 {
+  text-align: center;
+  font-size: 24rpx;
+}
 .book-card.data-v-0d65aa9e {
   padding: 10rpx;
   overflow: hidden;
@@ -8,7 +12,7 @@
 }
 .book-card .thumb.data-v-0d65aa9e {
   width: 180rpx;
-  height: 180rpx;
+  height: 780rpx;
   float: left;
   margin: 0 auto;
   overflow: hidden;
