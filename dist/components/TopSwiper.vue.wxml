@@ -1,0 +1,11 @@
+<template name="df39af8e">
+  <view class="_div data-v-f1cc6248 swiper">
+    <swiper indicator-dots="{{true}}" indicator-color="{{'#ffffff'}}" indicator-active-color="{{'#fa5559'}}" autoplay="{{true}}" interval="{{6000}}" duration="{{1000}}" circular="{{true}}" class="_swiper data-v-f1cc6248">
+      <block wx:key="imgindex" key="{{imgindex}}" wx:for="{{imgsUrl}}" wx:for-index="imgindex" wx:for-item="arr">
+        <swiper-item class="_swiper-item data-v-f1cc6248 swiper-item">
+          <image class="_img data-v-f1cc6248 swiper-img" mode="aspectFit" wx:key="book.id" key="{{book.id}}" src="{{book.image}}" bindtap="handleProxy" alt data-eventid="{{'0-'+imgindex+'-'+index}}" data-comkey="{{$k}}" wx:for="{{arr}}" wx:for-index="index" wx:for-item="book"></image>
+        </swiper-item>
+      </block>
+    </swiper>
+  </view>
+</template>

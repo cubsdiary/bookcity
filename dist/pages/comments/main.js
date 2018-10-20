@@ -1,15 +1,15 @@
 require("../../common/manifest.js");
 require("../../common/vendor.js");
-global.webpackJsonp([3],{
+global.webpackJsonp([4],{
 
-/***/ 27:
+/***/ 31:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__Comments__ = __webpack_require__(28);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__Comments__ = __webpack_require__(32);
 
 
 
@@ -18,16 +18,16 @@ app.$mount();
 
 /***/ }),
 
-/***/ 28:
+/***/ 32:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_mpvue_loader_1_1_4_mpvue_loader_lib_selector_type_script_index_0_Comments_vue__ = __webpack_require__(30);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_mpvue_loader_1_1_4_mpvue_loader_lib_template_compiler_index_id_data_v_7a876628_hasScoped_false_transformToRequire_video_src_source_src_img_src_image_xlink_href_node_modules_mpvue_loader_1_1_4_mpvue_loader_lib_selector_type_template_index_0_Comments_vue__ = __webpack_require__(31);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_mpvue_loader_1_1_4_mpvue_loader_lib_selector_type_script_index_0_Comments_vue__ = __webpack_require__(34);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_mpvue_loader_1_1_4_mpvue_loader_lib_template_compiler_index_id_data_v_7a876628_hasScoped_false_transformToRequire_video_src_source_src_img_src_image_xlink_href_node_modules_mpvue_loader_1_1_4_mpvue_loader_lib_selector_type_template_index_0_Comments_vue__ = __webpack_require__(38);
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(29)
+  __webpack_require__(33)
 }
 var normalizeComponent = __webpack_require__(0)
 /* script */
@@ -72,17 +72,30 @@ if (false) {(function () {
 
 /***/ }),
 
-/***/ 29:
+/***/ 33:
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
 
 /***/ }),
 
-/***/ 30:
+/***/ 34:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__util__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_CommentList__ = __webpack_require__(8);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_Card__ = __webpack_require__(6);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -90,16 +103,83 @@ if (false) {(function () {
 //
 //
 
-/* harmony default export */ __webpack_exports__["a"] = ({});
+
+
+
+/* harmony default export */ __webpack_exports__["a"] = ({
+  data() {
+    return {
+      comments: [],
+      books: [],
+      userinfo: {}
+    };
+  },
+  components: {
+    CommentList: __WEBPACK_IMPORTED_MODULE_1__components_CommentList__["a" /* default */],
+    Card: __WEBPACK_IMPORTED_MODULE_2__components_Card__["a" /* default */]
+  },
+  methods: {
+    init() {
+      wx.showNavigationBarLoading();
+      this.getComments();
+      this.getBooks();
+      wx.hideNavigationBarLoading();
+    },
+    async getBooks() {
+      const books = await Object(__WEBPACK_IMPORTED_MODULE_0__util__["a" /* get */])('/weapp/booklist', {
+        openid: this.userinfo.openId
+      });
+      console.log(books);
+      this.books = books.list;
+    },
+    async getComments() {
+      const comments = await Object(__WEBPACK_IMPORTED_MODULE_0__util__["a" /* get */])('/weapp/commentlist', {
+        openid: this.userinfo.openId
+      });
+      this.comments = comments.list;
+    }
+  },
+  onPullDownRefresh() {
+    this.init();
+    wx.stopPullDownRefresh();
+  },
+  onShow() {
+    if (!this.userinfo.openId) {
+      let userinfo = wx.getStorageSync('__userinfo__');
+      if (userinfo) {
+        this.userinfo = userinfo;
+        this.init();
+      }
+    }
+  }
+});
 
 /***/ }),
 
-/***/ 31:
+/***/ 38:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', [_vm._v("\n  " + _vm._s('comments') + "\n")])
+  return _c('div', {
+    staticClass: "container"
+  }, [(_vm.userinfo.openId) ? _c('CommentList', {
+    attrs: {
+      "type": "user",
+      "comments": _vm.comments,
+      "mpcomid": '0'
+    }
+  }) : _vm._e(), _vm._v(" "), (_vm.userinfo.openId) ? _c('div', [_c('div', {
+    staticClass: "page-title"
+  }, [_vm._v("我的图书")]), _vm._v(" "), _vm._l((_vm.books), function(book, bookid) {
+    return _c('Card', {
+      key: bookid,
+      attrs: {
+        "data": book,
+        "mpcomid": '1-' + bookid
+      }
+    })
+  }), _vm._v(" "), (!_vm.books.length) ? _c('div', [_vm._v("暂时还没添加过书，快去添加几本把")]) : _vm._e()], 2) : _vm._e()], 1)
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -114,5 +194,5 @@ if (false) {
 
 /***/ })
 
-},[27]);
+},[31]);
 //# sourceMappingURL=main.js.map

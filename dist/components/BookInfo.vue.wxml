@@ -1,0 +1,34 @@
+<import src="/components/Rate.vue.wxml" /><template name="5b0cd44a">
+  <view class="_div data-v-66d20ed8 bookinfo">
+    <view class="_div data-v-66d20ed8 thumb">
+      <image class="_img data-v-66d20ed8 back" src="{{data.image}}" mode="aspectFill"></image>
+      <image class="_img data-v-66d20ed8 img" src="{{data.image}}" mode="aspectFit"></image>
+      <view class="_div data-v-66d20ed8 info">
+        <view class="_div data-v-66d20ed8 title">
+          {{data.title}}
+        </view>
+        <view class="_div data-v-66d20ed8 author">
+          {{data.author}}
+        </view>
+      </view>
+    </view>
+    <view class="_div data-v-66d20ed8 detail">
+      <image src="{{userInfo.image}}" class="_img data-v-66d20ed8 avatar" mode="aspectFit"></image>
+      {{userInfo.name}}
+      <view class="_div data-v-66d20ed8 right text-primary">
+        {{data.rate}}分 <template data="{{...$root[$kk+'0'], $root}}" is="6c281504"></template></view>
+    </view>
+    <view class="_div data-v-66d20ed8 detail">
+      {{data.publisher}}
+      <view class="_div data-v-66d20ed8 right">
+        {{data.price}}
+      </view>
+    </view>
+    <view class="_div data-v-66d20ed8 tags">
+      <view class="_div data-v-66d20ed8 badge" wx:key="tag" key="{{tag}}" wx:for="{{data.tags}}" wx:for-index="index" wx:for-item="tag">{{tag}}</view>
+    </view>
+    <view class="_div data-v-66d20ed8 summary">
+      <view wx:key="i" key="{{i}}" wx:for="{{data.summary}}" wx:for-index="i" wx:for-item="sum" class="_p data-v-66d20ed8">{{sum}}</view>
+    </view>
+  </view>
+</template>

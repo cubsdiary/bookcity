@@ -1,5 +1,9 @@
-<template name="71729a6f">
-  <view class="_div data-v-7a876628">
-    {{'comments'}}
+<import src="/components/CommentList.vue.wxml" />
+<import src="/components/Card.vue.wxml" /><template name="71729a6f">
+  <view class="_div data-v-7a876628 container"><template wx:if="{{userinfo.openId}}" type="user" data="{{...$root[$kk+'0'], $root}}" is="1c02cca9"></template>
+    <view wx:if="{{userinfo.openId}}" class="_div data-v-7a876628">
+      <view class="_div data-v-7a876628 page-title">我的图书</view> <template wx:key="bookid" data="{{...$root[$kk+'1-'+bookid], $root}}" is="527eab34" wx:for="{{books}}" wx:for-index="bookid" wx:for-item="book"></template>
+      <view wx:if="{{!books.length}}" class="_div data-v-7a876628">暂时还没添加过书，快去添加几本把</view>
+    </view>
   </view>
 </template>

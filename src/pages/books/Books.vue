@@ -1,5 +1,6 @@
 <template>
   <div class="libary">
+    <TopSwiper :data="tops"></TopSwiper>
     <Card :key="book.id" v-for="book in bookList" :data="book"></Card>
     <p class="text-footer" v-if="!more">
       没有跟多数据
@@ -23,23 +24,28 @@
 */
 import {get} from '@/util'
 import Card from '@/components/Card'
+import TopSwiper from '@/components/TopSwiper'
 export default {
   components: {
-    Card
+    Card,
+    TopSwiper
   },
   data () {
     return {
       bookList: [],
+      tops: [],
       page: 0,
       more: true,
-      limit: 3
+      limit: 8
     }
   },
   mounted () {
     this.getList(true)
+    this.getTop()
   },
   onPullDownRefresh () {
     this.getList(true)
+    this.getTop()
   },
   onReachBottom () {
     if (!this.more) {
@@ -66,6 +72,10 @@ export default {
         this.bookList = this.bookList.concat(books.list)
       }
       wx.hideNavigationBarLoading()
+    },
+    async getTop () {
+      const tops = await get('/weapp/tops')
+      this.tops = tops.list
     }
   }
 }

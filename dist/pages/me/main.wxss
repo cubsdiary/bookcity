@@ -1,3 +1,4 @@
+@import "../../common/vendor.wxss";
 
 .container.data-v-69f1fa2c {
   background-color: #f6f6f6;
