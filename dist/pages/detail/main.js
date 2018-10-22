@@ -194,7 +194,7 @@ const AK = 'pASGHnRCm7ToTo0sysmaqUST6DhVvUVC';
       this.commentArr = comments.list;
     },
     getGeo(e) {
-      let url = 'http://api.map.baidu.com/geocoder/v2/';
+      let url = 'https://api.map.baidu.com/geocoder/v2/';
 
       if (e.target.value) {
         wx.getLocation({

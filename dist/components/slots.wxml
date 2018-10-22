@@ -1,8 +1,7 @@
-<import src="/components/CommentList.vue.wxml" />
-<import src="/components/Card.vue.wxml" />
 <import src="/components/BookInfo.vue.wxml" />
 <import src="/components/CommentList.vue.wxml" />
+<import src="/components/CommentList.vue.wxml" />
+<import src="/components/Card.vue.wxml" />
 <import src="/components/TopSwiper.vue.wxml" />
 <import src="/components/Card.vue.wxml" />
 <import src="/components/Rate.vue.wxml" />
-<import src="/components/CommentList.vue.wxml" />
